@@ -13,35 +13,30 @@
    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
    <!-- CSS -->
-   <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Weather Forecast</title>
 </head>
 <html>
-    <!-- NAVBAR -->
-    <!-- <nav class="navbar bg-dark">
-    </nav> -->
-    <!-- HEADER -->
-    <header id="header">
-        <h1>Weather Check</h1>
-        <i class="fa-solid fa-sun"></i>
-    </header>
-    <!-- HERO -->
-    <div id="hero"  class="position-relative">
-        <!-- <img src="./assets/vietnam.png" alt="hero-img" class="img-fluid"> -->
-        <div class="position-absolute hero-content">
-            <input type="text" class="location__Input" />
-            <button class =" btn btn-secondary text-uppercase checkBtn">Check</button>    
+<body>
+    <!-- SIDEBAR -->
+
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar">
+        <h1 class="heading">
+            <span>W</span>eather
+            <i class=" fa-regular fa-circle-check"></i>
+        </h1>
+        <div class="inputWrapper">
+            <input type="text"  class="location__Input"  placeholder="Type location">
+            <button class ="btn btn-success checkBtn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>    
         </div>
-    </div>
+        <div id="toast"></div>
+    </nav>
+
     <!-- CONTENT-->
-    <div class="weather__wrapper">
-        <div class="weather__title">
-
-        </div>
-        
-    </div>
-   
-
+        <div class="contentWrapper"></div> 
+  
     <script src="./script.js"></script>
 </body>
 </html>
