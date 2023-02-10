@@ -16,6 +16,7 @@ const toast = $("#toast");
 let weatherCurrentValue;
 let locationInputValue;
 let weatherDetailInDayArray;
+let weatherDetailInWeek;
 let tempCInDayArray;
 
 
@@ -45,12 +46,12 @@ let defaultLocationValue = "VietNam";
 //   }
 // });
 // checkBtn.addEventListener("click", handleCheckWeather);
-function handleSubmit (e) 
+
+formInput.onsubmit  = function handleSubmit (e) 
 {
     e.preventDefault();
-    console.log(locationInput.value);
+   handleCheckWeather();
 }
-formInput.onsubmit(e) = handleSubmit(e);
 
 window.onload = function (e) {
     // getData(defaultLocationValue);
@@ -85,7 +86,7 @@ function getData(value)
            // console.log(data);
            // getWeatherByHour(data);
             
-            //showWeatherCurrent(data);
+            showWeatherCurrent(data);
        }
     })
     .catch((error) => 
@@ -96,7 +97,7 @@ function getData(value)
 
 function getWeatherByHour(data)
 {
-    weatherDetailInDayArray = data.forecast.forecastday[0];
+   
     for(let i = 0; i <= weatherDetailInDayArray.hour.length; i++)
     {
         console.log(weatherDetailInDayArray.hour[i].temp_c);
@@ -109,25 +110,71 @@ function getWeatherByHour(data)
 }
 function showWeatherCurrent(data) 
 {
+    weatherDetailInDayArray = data.forecast.forecastday[0].hour;
+    console.log(weatherDetailInDayArray);
+    // console.log(weatherDetailInWeek);
     weatherCurrentValue =
         `
         <div class="weather__current">
-            <span class="tempC">${data.current.temp_c} &deg;</span>
-           <div class="weather_info">
-                <div class="location">
-                    <span class="location__name">
-                        ${data.location.name}
-                    </span> 
-                    <span class="location___time">
-                        ${data.location.localtime}
-                    </span>
-                </div>
-                <div class="condition">
-                    <img class="condition__icon" src="${data.current.condition.icon}">
-                    <span class="condition__status">${data.current.condition.text}</span>
-                </div>
-           </div>
+            <span class="location___time">
+                ${data.location.localtime}
+            </span>
+            <div class="weather__info">
+                <span class="tempC">${data.current.temp_c} &deg;</span>
+                <img class="condition__icon" src="${data.current.condition.icon}">
+            </div>
+            <span class="location__name"> ${data.location.name}</span> 
+            <div class="weather__detail">
+                <span class="detail__info">Wind
+                    <span>${data.current.wind_mph}mph</span>
+                </span>
+                <span class="detail__info">Humidity
+                    <span>${data.current.humidity}</span>
+                </span>
+                <span class="detail__info">UV
+                    <span>${data.current.uv}</span>
+                </span>
+            </div>
         </div> 
+
+        <div class="cardWrapper">
+            <div class="card__detail">
+                <span class="card__time">0:00</span>
+                <img class="card__icon" src="${weatherDetailInDayArray[0].condition.icon}" />
+                <span class="card__tempC">${weatherDetailInDayArray[0].temp_c}&deg;</span>
+                <span class="card__status">${weatherDetailInDayArray[0].condition.text}</span>
+            </div>
+            <div class="card__detail">
+                <span class="card__time">4:00</span>
+                <img class="card__icon" src="${weatherDetailInDayArray[4].condition.icon}" />
+                <span class="card__tempC">${weatherDetailInDayArray[4].temp_c}&deg;</span>
+                <span class="card__status">${weatherDetailInDayArray[4].condition.text}</span>
+            </div>
+            <div class="card__detail">
+                <span class="card__time">8:00</span>
+                <img class="card__icon" src="${weatherDetailInDayArray[8].condition.icon}" />
+                <span class="card__tempC">${weatherDetailInDayArray[8].temp_c}&deg;</span>
+                <span class="card__status">${weatherDetailInDayArray[8].condition.text}</span>
+            </div>
+            <div class="card__detail">
+                <span class="card__time">12:00</span>
+                <img class="card__icon" src="${weatherDetailInDayArray[12].condition.icon}" />
+                <span class="card__tempC">${weatherDetailInDayArray[12].temp_c}&deg;</span>
+                <span class="card__status">${weatherDetailInDayArray[12].condition.text}</span>
+            </div>
+            <div class="card__detail">
+                <span class="card__time">16:00</span>
+                <img class="card__icon" src="${weatherDetailInDayArray[16].condition.icon}" />
+                <span class="card__tempC">>${weatherDetailInDayArray[16].temp_c}&deg;</span>
+                <span class="card__status">${weatherDetailInDayArray[16].condition.text}</span>
+            </div>
+            <div class="card__detail">
+                <span class="card__time">20:00</span>
+                <img class="card__icon" src="${weatherDetailInDayArray[20].condition.icon}" />
+                <span class="card__tempC">>${weatherDetailInDayArray[20].temp_c}&deg;</span>
+                <span class="card__status">${weatherDetailInDayArray[20].condition.text}</span>
+            </div>
+        </div>
         `;
     contentWrapper.innerHTML = weatherCurrentValue;
 }
