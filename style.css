@@ -18,58 +18,35 @@
 
 body {
     
-    background: url('./assets/vietnam.png');
-    width: 100vw;
-    height: 100vh;
-}
-
-/* BEGIN: SIDEBAR */
-.heading{
-    margin: 16px;
-    color: #FFF;
-    position: relative;
-   
-    width: max-content;
- 
-}
-.heading span {
-    background-color: #000;
-    padding: 4px;
-    border-radius: 16px;
-}
-.heading i {
-    font-size: 16px;
-    position: absolute;
-
-}
-.sidebar{
-    background-image: linear-gradient(to left, rgba(51, 53, 55, 0.6) -26.48%, rgba(31, 35, 39, 0.6) 73.52%);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 360px;
-    height: 100%;  
+    background: url('./assets/anhmay1.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height:100%;
+    width: 100%;
+    /* width: 100vw;
+    height: 100vh; */
     display: flex;
-    
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
-.inputWrapper{
-  margin-top: 32px;
-  margin-left: 16px;
+
+/* BEGIN: INPUT */
+
+#inputForm{
+     display: flex;
+     flex-direction: row;
+     font-size: 20px;
+     margin-top: 8px;
 }
+
 .location__Input{
-    width: 70%;
+    width: min-content;
     height: 32px;
-    margin-right: 8px;
     border: none;
     border-bottom: 1px solid #FFF;
-   
     background: rgba(0, 0, 0, 0);
     transition: ease-in-out, width .35s ease-in-out;
     color: #FFF;
-    font-size: 16px;
 }
 .location__Input::placeholder{
     color: #FFF;
@@ -79,42 +56,45 @@ body {
     border-color: #58a6ff;
     outline: none;
 }
-
-
-/* END: SIDEBAR */
+/* END: INPUT */
 
 /* BEGIN: CONTENT */
 .contentWrapper{
     display: flex;
     flex-direction: column;
-    width: calc(100% - 360px)
-}
-.intro{
-    margin: 16px;
-    font-size: 64px;
-    color: #FFF;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .weather__current{
-  
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 48px;
 }
-.weather_info{
+.weather__info{
     display: flex;
     flex-direction: row;
 }
-.tempC{
-    margin-right: 16px;
-    font-size: 84px;
-    color: #FFF;
+.weather__detail{
+    display: flex;
+    flex-direction: row;
 }
-.location{
-  
-    margin-right: 16px;
+.detail__info{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 8px;
+    background-image: linear-gradient(to left, rgba(216, 224, 232, 0.6) -26.48%, rgba(231, 239, 248, 0.6) 73.52%);
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+}
+.tempC{
+    font-size: 84px;
     color: #FFF;
 }
 .location__name{
@@ -123,17 +103,11 @@ body {
 .location__time{
     font-size: 16px;
 }
-.condition{
-  
-    display: flex;
-    flex-direction: column;
-    color: #FFF;
-}
 .condition__icon{
-    width: 48px;
-    height: 48px;
-    
+    width: 96px;
+    height: 96px; 
 }
+
 
 /* BEGIN: TOAST */
 #toast{
@@ -178,10 +152,8 @@ body {
     color: #ff623d;
 }
 .toast__body{
-
     /* để khi content ngắn thì nút close vẫn không bị đẩy vào trong */
     flex-grow: 1;
-
 }
 .toast__title{
 
@@ -189,7 +161,6 @@ body {
     font-weight: 600;
     color: #ff623d
 }
-
 .toast__msg{
 
     padding: 4px;
@@ -211,3 +182,55 @@ body {
 
 /* END: TOAST */
 
+/* BEGIN: CARD */
+.card__icon {
+    width: 48px;
+    height: 48px;
+}
+
+/* BEGIN: CARD */
+
+.cardWrapper{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 48px;
+}
+.card__detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 200px;
+    background-image: linear-gradient(to left, rgba(216, 224, 232, 0.6) -26.48%, rgba(231, 239, 248, 0.6) 73.52%);
+    border-radius: 20px;
+    margin: 8px;
+}
+
+.card__time{
+    font-size: 22px;
+}
+
+/* BEGIN: CHART */
+
+.chartWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+}
+#temperChart{
+    width:100%; 
+    max-width:700px;
+    padding: 24px;
+    border-radius: 20px;
+ 
+}
+
+.chart__title{
+    font-size: 44px;
+    margin-bottom: 8px;
+    color: #000;
+}
