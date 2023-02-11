@@ -24,20 +24,21 @@
 <body>
     <!-- CONTENT-->
 
-    <form id="inputForm" name="inputForm">
-        <span class="p-1">Right now in</span>
-        <input type="text"  class="location__Input" placeholder="your location">
-        <span>, it's sunny.</span>
-    </form>
-    <div class="contentWrapper">
-    
-        <!-- <div class="chartWrapper">
-            <div class="chart__title">How's the temperature today?</div>
-            <canvas id="temperChart"></canvas>
-        </div> -->
+    <div id="page">
+        <form id="inputForm" name="inputForm">
+            <span class="p-1">Right now in</span>
+            <input type="text"  class="location__Input" placeholder="your location">
+            <span class="current__status"> </span>
+        </form>
 
-      
-    </div> 
+        <div class="contentWrapper">
+              
+        </div> 
+        <div id="toast">
+    
+        </div>
+        
+    </div>
   
     <script src="./script.js"></script>
 </body>

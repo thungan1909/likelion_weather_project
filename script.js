@@ -1,12 +1,10 @@
 // declaration
 const $ = document.querySelector.bind(document);
 
-
+const page = $("#page");
 const locationInput = $(".location__Input");
-// const checkBtn = $(".checkBtn");
-
 const formInput = document.getElementById("inputForm");
-
+const current__status = $(".current__status");
 const contentWrapper = $(".contentWrapper");
 const weather__current = $(".weather__current");
 const toast = $("#toast");
@@ -18,34 +16,9 @@ let locationInputValue;
 let weatherDetailInDayArray;
 let weatherDetailInWeek;
 let tempCInDayArray;
+let currentStatusValue;
 
-
-//
 let defaultLocationValue = "VietNam";
-
-// var xValues = [50,60,70,80,90,100,110,120,130,140,150];
-// var yValues = [7,8,8,9,9,9,10,11,14,14,15];
-
-// new Chart("temperChart", {
-//   type: "line",
-//   data: {
-//     labels: xValues,
-//     datasets: [{
-//       fill: false,
-//       lineTension: 0,
-//       backgroundColor: "red",
-//       borderColor: "red",
-//       data: yValues
-//     }]
-//   },
-//   options: {
-//     legend: {display: false},
-//     scales: {
-//       yAxes: [{ticks: {min: 6, max:16}}],
-//     }
-//   }
-// });
-// checkBtn.addEventListener("click", handleCheckWeather);
 
 formInput.onsubmit  = function handleSubmit (e) 
 {
@@ -54,13 +27,9 @@ formInput.onsubmit  = function handleSubmit (e)
 }
 
 window.onload = function (e) {
-    // getData(defaultLocationValue);
+    getData(defaultLocationValue);
 
 }
-
-//function
-
-
 
 //function to handle check weather
 function handleCheckWeather() 
@@ -82,10 +51,7 @@ function getData(value)
             showNotExistToast(value);
         }
        else
-       {
-           // console.log(data);
-           // getWeatherByHour(data);
-            
+       {            
             showWeatherCurrent(data);
        }
     })
@@ -94,25 +60,14 @@ function getData(value)
         console.log('error', error);
     })
 }
-
-function getWeatherByHour(data)
-{
-   
-    for(let i = 0; i <= weatherDetailInDayArray.hour.length; i++)
-    {
-        console.log(weatherDetailInDayArray.hour[i].temp_c);
-    }
-    // console.log(weatherDetailInDayArray);
-    // for (let i = 0; i <= arr.length; i++) 
-    // {
-    //     console.log(arr[i].temp_c);
-    // }
-}
 function showWeatherCurrent(data) 
 {
     weatherDetailInDayArray = data.forecast.forecastday[0].hour;
-    console.log(weatherDetailInDayArray);
-    // console.log(weatherDetailInWeek);
+    showBackground(data);
+    currentStatusValue = `
+    <span class="current__status"> It's is  ${data.current.condition.text}.</span>
+    `
+    current__status.innerHTML = currentStatusValue;
     weatherCurrentValue =
         `
         <div class="weather__current">
@@ -120,18 +75,34 @@ function showWeatherCurrent(data)
                 ${data.location.localtime}
             </span>
             <div class="weather__info">
-                <span class="tempC">${data.current.temp_c} &deg;</span>
-                <img class="condition__icon" src="${data.current.condition.icon}">
+                <span class="tempC">${data.current.temp_c} &deg
+                </span>
+                <img class="condition__icon" src="${data.current.condition.icon}">              
+            </div>
+                <div class="changeDeg">
+                <button class="deg__Btn">
+                
+                    <span> &deg;</span>
+                    <i class="fa-solid fa-c"></i>
+                </button>
+                <span>/</span>
+                <button class="deg__Btn">
+                    <span> &deg;</span>
+                    <i class="fa-solid fa-f"></i>
+                </button>
             </div>
             <span class="location__name"> ${data.location.name}</span> 
             <div class="weather__detail">
-                <span class="detail__info">Wind
+                <span class="detail__info">
+                    <span class="detail__title">Wind</span>
                     <span>${data.current.wind_mph}mph</span>
                 </span>
-                <span class="detail__info">Humidity
+                <span class="detail__info">
+                    <span class="detail__title">Humidity</span>
                     <span>${data.current.humidity}</span>
                 </span>
-                <span class="detail__info">UV
+                <span class="detail__info">
+                    <span class="detail__title">UV</span>
                     <span>${data.current.uv}</span>
                 </span>
             </div>
@@ -175,6 +146,8 @@ function showWeatherCurrent(data)
                 <span class="card__status">${weatherDetailInDayArray[20].condition.text}</span>
             </div>
         </div>
+
+
         `;
     contentWrapper.innerHTML = weatherCurrentValue;
 }
@@ -247,7 +220,7 @@ function validateInput(value)
 {
     if(!checkEmptyValue(value)) 
     {
-        getData(value)
+        getData(value);
     }
     else 
     {
@@ -255,3 +228,19 @@ function validateInput(value)
     }
 }
 
+function isDay(value){
+    if(value == 1) return true;
+    else return false;
+}
+function showBackground(data)
+{
+    if(isDay(data.current.is_day))
+    {
+        page.style.backgroundImage = "url('./assets/anhmay.jpg')";
+        page.style.color = "#000";
+    }
+    else {
+        page.style.backgroundImage = "url('./assets/night.jpg')";
+        page.style.color = "#FFF";
+    }
+}
