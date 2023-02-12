@@ -6,32 +6,51 @@ const locationInput = $(".location__Input");
 const formInput = document.getElementById("inputForm");
 const current__status = $(".current__status");
 const contentWrapper = $(".contentWrapper");
-const weather__current = $(".weather__current");
+const weatherCurrent = $(".weather__current");
+const weatherDetail = $(".weather__detail");
+const cardWrapper = $(".cardWrapper");
+const degC__Btn = $(".degC__Btn");
+const degF__Btn = $(".degF__Btn");
 const toast = $("#toast");
+//
+const locationTime = $(".location___time");
+const weatherTemperature = $(".weather__temperature");
+const tempIcon = $(".temp__icon");
+const conditionIcon = $(".condition__icon");
+const locationName = $(".location__name");
 
 
 //variable to save element
 let weatherCurrentValue;
 let locationInputValue;
-let weatherDetailInDayArray;
-let weatherDetailInWeek;
-let tempCInDayArray;
-let currentStatusValue;
-
 let defaultLocationValue = "VietNam";
+
+
+let weatherDetailInDayArray;
+
+
+let currentStatusElement;
+let weatherDetailElement;
+let cardWrapperElement;
+let weatherCurrentElement;
+
+
+let degIcon = "&degC";
+let degValue;
+
 
 formInput.onsubmit  = function handleSubmit (e) 
 {
     e.preventDefault();
    handleCheckWeather();
 }
+degC__Btn.addEventListener("click", changeDegToC);
+degF__Btn.addEventListener("click", changeDegToF);
 
 window.onload = function (e) {
-    getData(defaultLocationValue);
-
+   getData(defaultLocationValue);
 }
 
-//function to handle check weather
 function handleCheckWeather() 
 {   
     locationInputValue = locationInput.value;
@@ -53,6 +72,7 @@ function getData(value)
        else
        {            
             showWeatherCurrent(data);
+            showWeatherDetail(data);
        }
     })
     .catch((error) => 
@@ -60,39 +80,10 @@ function getData(value)
         console.log('error', error);
     })
 }
-function showWeatherCurrent(data) 
+function showWeatherDetail(data)
 {
     weatherDetailInDayArray = data.forecast.forecastday[0].hour;
-    showBackground(data);
-    currentStatusValue = `
-    <span class="current__status"> It's is  ${data.current.condition.text}.</span>
-    `
-    current__status.innerHTML = currentStatusValue;
-    weatherCurrentValue =
-        `
-        <div class="weather__current">
-            <span class="location___time">
-                ${data.location.localtime}
-            </span>
-            <div class="weather__info">
-                <span class="tempC">${data.current.temp_c} &deg
-                </span>
-                <img class="condition__icon" src="${data.current.condition.icon}">              
-            </div>
-                <div class="changeDeg">
-                <button class="deg__Btn">
-                
-                    <span> &deg;</span>
-                    <i class="fa-solid fa-c"></i>
-                </button>
-                <span>/</span>
-                <button class="deg__Btn">
-                    <span> &deg;</span>
-                    <i class="fa-solid fa-f"></i>
-                </button>
-            </div>
-            <span class="location__name"> ${data.location.name}</span> 
-            <div class="weather__detail">
+                weatherDetailElement =  `
                 <span class="detail__info">
                     <span class="detail__title">Wind</span>
                     <span>${data.current.wind_mph}mph</span>
@@ -105,51 +96,60 @@ function showWeatherCurrent(data)
                     <span class="detail__title">UV</span>
                     <span>${data.current.uv}</span>
                 </span>
+            `;
+            weatherDetail.innerHTML = weatherDetailElement;
+            cardWrapperElement = `
+            <div class="card__detail">
+            <span class="card__time">0:00</span>
+            <img class="card__icon" src="${weatherDetailInDayArray[0].condition.icon}" />
+            <span class="card__tempC">${weatherDetailInDayArray[0].temp_c}&deg;</span>
+            <span class="card__status">${weatherDetailInDayArray[0].condition.text}</span>
             </div>
-        </div> 
+            <div class="card__detail">
+            <span class="card__time">4:00</span>
+            <img class="card__icon" src="${weatherDetailInDayArray[4].condition.icon}" />
+            <span class="card__tempC">${weatherDetailInDayArray[4].temp_c}&deg;</span>
+            <span class="card__status">${weatherDetailInDayArray[4].condition.text}</span>
+            </div>
+            <div class="card__detail">
+            <span class="card__time">8:00</span>
+            <img class="card__icon" src="${weatherDetailInDayArray[8].condition.icon}" />
+            <span class="card__tempC">${weatherDetailInDayArray[8].temp_c}&deg;</span>
+            <span class="card__status">${weatherDetailInDayArray[8].condition.text}</span>
+            </div>
+            <div class="card__detail">
+            <span class="card__time">12:00</span>
+            <img class="card__icon" src="${weatherDetailInDayArray[12].condition.icon}" />
+            <span class="card__tempC">${weatherDetailInDayArray[12].temp_c}&deg;</span>
+            <span class="card__status">${weatherDetailInDayArray[12].condition.text}</span>
+            </div>
+            <div class="card__detail">
+            <span class="card__time">16:00</span>
+            <img class="card__icon" src="${weatherDetailInDayArray[16].condition.icon}" />
+            <span class="card__tempC">>${weatherDetailInDayArray[16].temp_c}&deg;</span>
+            <span class="card__status">${weatherDetailInDayArray[16].condition.text}</span>
+            </div>
+            <div class="card__detail">
+            <span class="card__time">20:00</span>
+            <img class="card__icon" src="${weatherDetailInDayArray[20].condition.icon}" />
+            <span class="card__tempC">>${weatherDetailInDayArray[20].temp_c}&deg;</span>
+            <span class="card__status">${weatherDetailInDayArray[20].condition.text}</span>
+            </div>`;
+            cardWrapper.innerHTML = cardWrapperElement;
+}
+function showWeatherCurrent(data) 
+{
+ 
+    showBackground(data);
+    degValue = data.current.temp_c;
+    currentStatusElement = `<span class="current__status"> It's is  ${data.current.condition.text}.</span>  `;
+    current__status.innerHTML = currentStatusElement ;
 
-        <div class="cardWrapper">
-            <div class="card__detail">
-                <span class="card__time">0:00</span>
-                <img class="card__icon" src="${weatherDetailInDayArray[0].condition.icon}" />
-                <span class="card__tempC">${weatherDetailInDayArray[0].temp_c}&deg;</span>
-                <span class="card__status">${weatherDetailInDayArray[0].condition.text}</span>
-            </div>
-            <div class="card__detail">
-                <span class="card__time">4:00</span>
-                <img class="card__icon" src="${weatherDetailInDayArray[4].condition.icon}" />
-                <span class="card__tempC">${weatherDetailInDayArray[4].temp_c}&deg;</span>
-                <span class="card__status">${weatherDetailInDayArray[4].condition.text}</span>
-            </div>
-            <div class="card__detail">
-                <span class="card__time">8:00</span>
-                <img class="card__icon" src="${weatherDetailInDayArray[8].condition.icon}" />
-                <span class="card__tempC">${weatherDetailInDayArray[8].temp_c}&deg;</span>
-                <span class="card__status">${weatherDetailInDayArray[8].condition.text}</span>
-            </div>
-            <div class="card__detail">
-                <span class="card__time">12:00</span>
-                <img class="card__icon" src="${weatherDetailInDayArray[12].condition.icon}" />
-                <span class="card__tempC">${weatherDetailInDayArray[12].temp_c}&deg;</span>
-                <span class="card__status">${weatherDetailInDayArray[12].condition.text}</span>
-            </div>
-            <div class="card__detail">
-                <span class="card__time">16:00</span>
-                <img class="card__icon" src="${weatherDetailInDayArray[16].condition.icon}" />
-                <span class="card__tempC">>${weatherDetailInDayArray[16].temp_c}&deg;</span>
-                <span class="card__status">${weatherDetailInDayArray[16].condition.text}</span>
-            </div>
-            <div class="card__detail">
-                <span class="card__time">20:00</span>
-                <img class="card__icon" src="${weatherDetailInDayArray[20].condition.icon}" />
-                <span class="card__tempC">>${weatherDetailInDayArray[20].temp_c}&deg;</span>
-                <span class="card__status">${weatherDetailInDayArray[20].condition.text}</span>
-            </div>
-        </div>
-
-
-        `;
-    contentWrapper.innerHTML = weatherCurrentValue;
+    locationTime.innerHTML = `${data.location.localtime}`;
+    weatherTemperature.innerHTML = `${degValue}`;
+    tempIcon.innerHTML = `${degIcon}`;
+    conditionIcon.src =    `${data.current.condition.icon}`;
+    locationName.innerHTML = `${data.location.name}`;
 }
 
 function handleToast({message}) {
@@ -195,9 +195,16 @@ function showNotExistToast(value) {
 function showEmptyToast() {
         handleToast (
             {
-                message:   `This input is empty`
+                message:   `This input is empty. Please try again`
             }
         )
+}
+function showNotChangeDegToast() {
+    handleToast (
+        {
+            message:   `Sorry, we can't change to ${degIcon}`
+        }
+    )
 }
 
 //function to check value is empty or not
@@ -242,5 +249,34 @@ function showBackground(data)
     else {
         page.style.backgroundImage = "url('./assets/night.jpg')";
         page.style.color = "#FFF";
+    }
+}
+
+
+function changeDegToF() {
+
+    if (degIcon === "&degC")
+    {
+        degValue = Math.round((degValue * 1.8) + 32);
+        degIcon = "&degF";
+        weatherTemperature.innerHTML = `${degValue}`;
+        tempIcon.innerHTML = `${degIcon}`;
+    }
+    else {
+        showNotChangeDegToast();
+    }
+    
+}
+function changeDegToC () {
+
+    if(degIcon === "&degF")
+    {
+        degValue= Math.round((degValue-32) / 1.8);
+        degIcon = "&degC";
+        weatherTemperature.innerHTML = `${degValue}`;
+        tempIcon.innerHTML = `${degIcon}`;
+    }
+    else {
+        showNotChangeDegToast();
     }
 }

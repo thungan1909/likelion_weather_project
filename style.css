@@ -43,7 +43,8 @@
      display: flex;
      flex-direction: row;
      font-size: 20px;
-     margin-top: 8px;
+     margin-top: 16px;
+     margin-bottom: 16px;
 }
 
 .location__Input{
@@ -80,11 +81,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 48px;
+    margin: 12px;
+
 }
 .weather__info{
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 .weather__detail{
     display: flex;
@@ -95,6 +98,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+   
     margin: 8px;
     background-image: linear-gradient(to left, rgba(216, 224, 232, 0.6) -26.48%, rgba(231, 239, 248, 0.6) 73.52%);
     border-radius: 10px;
@@ -105,14 +109,18 @@
 .detail__title{
     font-weight: bold;
 }
-.tempC{
+.weather__temperature{
     font-size: 84px;
     color: #FFF;
 }
+.tempIcon{
+    font-size: 30px;
+    position: absolute;
+    bottom: 0;
+}
 .changeDeg{
     display: flex;
-    flex-direction: row;
-  
+    flex-direction: row; 
 }
 
 .deg__Btn{
