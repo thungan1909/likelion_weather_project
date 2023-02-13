@@ -19,51 +19,123 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
      </script>
+     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 <html>
 <body>
     <!-- CONTENT-->
 
-    <div id="page">
-        <form id="inputForm" name="inputForm">
-            <span class="p-1">Right now in</span>
-            <input type="text"  class="location__Input" placeholder="your location">
-            <span class="current__status"> </span>
-        </form>
-      
-
-        <div class="contentWrapper">
-            <div class="weather__current">
-                <span class="location___time">
-                </span>
-                <div class="weather__info">
-                    <span class="weather__temperature"></span>
-                             <span class="temp__icon"></span>
-                    <img class="condition__icon" src="">              
-                </div>
-                <span class="location__name"></span>  
-            </div>
-            <div class="changeDeg">
-                <button class="deg__Btn degC__Btn">
-                    <span> &deg;</span>
-                    <i class="fa-solid fa-c"></i>
-                </button>
-                <span>/</span>
-                <button class="deg__Btn degF__Btn">
-                    <span> &deg;</span>
-                    <i class="fa-solid fa-f"></i>
-                </button>
-            </div>
-            <div class="weather__detail">
+    <div id="page">   
+        <!-- BANNER -->
+        <div id="banner">
             
+            <div class="flex-column">
+                <form id="inputForm" name="inputForm">
+                    <span class="p-1">Right now in</span>
+                    <input type="text"  class="location__Input" placeholder="your location">
+                    <span class="current__status"> </span>
+                </form>
+                <div class="weather__current">
+                    <div class="weather__info">
+                        <span class="weather__temperature"></span>
+                        <span class="temp__icon"></span>
+                        <img class="condition__icon" src="">              
+                    </div>
+                    <div class="changeDeg">
+                        <button class="deg__Btn degC__Btn">
+                            <span> &deg;</span>
+                            <i class="fa-solid fa-c"></i>
+                        </button>
+                        <span>/</span>
+                        <button class="deg__Btn degF__Btn">
+                            <span> &deg;</span>
+                            <i class="fa-solid fa-f"></i>
+                        </button>
+                    </div>
+                    <span class="location__name"></span>  
+                    <span class="location___time"></span>
             </div>
+        </div>
+        <div class="weather__detail">
+           
+        
+        </div>
+            
+    
+           
+        </div>
+        <div id="content">
+            <div class="3daysWrapper">
+                <h2> 3 days Forecast</h2>
+                <div class="dayCard">
+                    <div class="flex-column text-center mx-4">
+                        <div class="card__time">23/02/20223</div>
+                        <div class="card__temperature">23&deg;C</div>
+                    </div>
+                    <div class="card__condition">
+                        <img class="card__icon" src="//cdn.weatherapi.com/weather/64x64/day/116.png"></img>
+                        <div class="card__status">Cloudy</div>
+                   </div>
+                </div>
+                <div class="dayCard">
+                    <div class="card__condition">
+                        <img class="card__icon" src="//cdn.weatherapi.com/weather/64x64/day/116.png"></img>
+                        <div class="card__status">Cloudy</div>
+                   </div>
+                    <div class="flex-column text-center mx-4">
+                        <div class="card__time">23/02/20223</div>
+                        <div class="card__temperature">23&deg;C</div>
+                    </div>
+                   
+                </div>
+                <div class="dayCard">
+                    <div class="flex-column text-center mx-4">
+                        <div class="card__time">23/02/20223</div>
+                        <div class="card__temperature">23&deg;C</div>
+                    </div>
+                    <div class="card__condition">
+                        <img class="card__icon" src="//cdn.weatherapi.com/weather/64x64/day/116.png"></img>
+                        <div class="card__status">Cloudy</div>
+                   </div>
+                </div>
+            </div>
+            <div id="chart">
+                <h2 class="text-center"> 3 days Forecast</h2>
+            </div>
+        </div>
+       
+       
+<!--     
+        <div class="contentWrapper">
+        
+         
+     
+
+       
+            
+            
             <div class="cardWrapper">
                 
+            </div> 
+            <div id="changeDay__BtnWrapper">
+                <button>
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>The previous day</span>
+                    
+                </button>
+                <button>
+                    
+                    <span> The next day</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
             </div>
         </div> 
+       -->
+
         <div id="toast">
     
         </div>
+    
         
     </div>
   
