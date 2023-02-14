@@ -19,7 +19,7 @@ const tempIcon = $(".temp__icon");
 const conditionIcon = $(".condition__icon");
 const locationName = $(".location__name");
 const nextdaysWrapper = $(".nextdaysWrapper");
-
+const banner = $("#banner");
 
 //variable to save element
 let weatherCurrentValue;
@@ -112,10 +112,10 @@ function showWeatherDetail(data)
 function showWeatherCurrent(data) 
 {
  
-    // showBackground(data);
+    showBackground(data);
     degValue = data.current.temp_c;
-   currentStatusElement = `<span class="current__status"> It's is  ${data.current.condition.text}.</span>  `;
-   current__status.innerHTML = currentStatusElement ;
+    currentStatusElement = `<span class="current__status"> It's is  ${data.current.condition.text}.</span>  `;
+    current__status.innerHTML = currentStatusElement ;
 
     locationTime.innerHTML = `${data.location.localtime}`;
     weatherTemperature.innerHTML = `${degValue}`;
@@ -132,7 +132,7 @@ function showNextday(data)
     nextdaysWrapperElement = `
     <span class="cardTitle"> <span class="fontBold">3 days</span> <span class="fontThin">Forecast</span></span>
     <div class="dayCard">
-        <div class="flex-column text-center mx-4">
+        <div class="card__info">
             <div class="card__time">${day1.date}</div>
             <div class="card__temperature">${day1.day.avgtemp_c}&deg;C</div>
         </div>
@@ -146,14 +146,14 @@ function showNextday(data)
             <img class="card__icon" src="${day2.day.condition.icon}"></img>
             <div class="card__status">${day2.day.condition.text}</div>
        </div>
-        <div class="flex-column text-center mx-4">
+        <div class="card__info">
             <div class="card__time">${day2.date}</div>
             <div class="card__temperature">${day2.day.avgtemp_c}&deg;C</div>
         </div>
        
     </div>
     <div class="dayCard">
-        <div class="flex-column text-center mx-4">
+        <div class="card__info">
             <div class="card__time">${day3.date}</div>
             <div class="card__temperature">${day3.day.avgtemp_c}&deg;C</div>
         </div>
@@ -314,14 +314,15 @@ function isDay(value){
 }
 function showBackground(data)
 {
+    console.log(data.current.is_day);
     if(isDay(data.current.is_day))
     {
-        page.style.backgroundImage = "url('./assets/anhmay.jpg')";
-        page.style.color = "#000";
+        banner.style.backgroundImage = "url('./assets/anhmay.jpg');"
+        banner.style.color = "#000";
     }
     else {
-        page.style.backgroundImage = "url('./assets/night.jpg')";
-        page.style.color = "#FFF";
+        banner.style.backgroundImage = "url('./assets/night.jpg')";
+        banner.style.color = "#FFF";
     }
 }
 
