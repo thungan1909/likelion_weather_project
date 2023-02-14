@@ -29,7 +29,7 @@
         <!-- BANNER -->
         <div id="banner">
             
-            <div class="flex-column">
+            <div class="flex-column my-4 ">
                 <form id="inputForm" name="inputForm">
                     <span class="p-1">Right now in</span>
                     <input type="text"  class="location__Input" placeholder="your location">
@@ -39,7 +39,7 @@
                     <div class="weather__info">
                         <span class="weather__temperature"></span>
                         <span class="temp__icon"></span>
-                        <img class="condition__icon" src="">              
+                        <img class="condition__icon" src="" alt="condition__icon">              
                     </div>
                     <div class="changeDeg">
                         <button class="deg__Btn degC__Btn">
@@ -56,6 +56,7 @@
                     <span class="location___time"></span>
             </div>
         </div>
+        
         <div class="weather__detail">
            
         
@@ -65,42 +66,11 @@
            
         </div>
         <div id="content">
-            <div class="3daysWrapper">
-                <h2> 3 days Forecast</h2>
-                <div class="dayCard">
-                    <div class="flex-column text-center mx-4">
-                        <div class="card__time">23/02/20223</div>
-                        <div class="card__temperature">23&deg;C</div>
-                    </div>
-                    <div class="card__condition">
-                        <img class="card__icon" src="//cdn.weatherapi.com/weather/64x64/day/116.png"></img>
-                        <div class="card__status">Cloudy</div>
-                   </div>
-                </div>
-                <div class="dayCard">
-                    <div class="card__condition">
-                        <img class="card__icon" src="//cdn.weatherapi.com/weather/64x64/day/116.png"></img>
-                        <div class="card__status">Cloudy</div>
-                   </div>
-                    <div class="flex-column text-center mx-4">
-                        <div class="card__time">23/02/20223</div>
-                        <div class="card__temperature">23&deg;C</div>
-                    </div>
-                   
-                </div>
-                <div class="dayCard">
-                    <div class="flex-column text-center mx-4">
-                        <div class="card__time">23/02/20223</div>
-                        <div class="card__temperature">23&deg;C</div>
-                    </div>
-                    <div class="card__condition">
-                        <img class="card__icon" src="//cdn.weatherapi.com/weather/64x64/day/116.png"></img>
-                        <div class="card__status">Cloudy</div>
-                   </div>
-                </div>
+            <div class="nextdaysWrapper">
+
             </div>
             <div id="chart">
-                <h2 class="text-center"> 3 days Forecast</h2>
+                
             </div>
         </div>
        

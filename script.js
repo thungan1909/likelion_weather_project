@@ -18,6 +18,7 @@ const weatherTemperature = $(".weather__temperature");
 const tempIcon = $(".temp__icon");
 const conditionIcon = $(".condition__icon");
 const locationName = $(".location__name");
+const nextdaysWrapper = $(".nextdaysWrapper");
 
 
 //variable to save element
@@ -33,89 +34,14 @@ let currentStatusElement;
 let weatherDetailElement;
 let cardWrapperElement;
 let weatherCurrentElement;
+let nextdaysWrapperElement;
 
 
 let degIcon = "&degC";
 let degValue;
 
-// const labels = Utils.months({count: 7});
-// const datas = {
-//   labels: labels,
-//   datasets: [{
-//     label: 'My First Dataset',
-//     data: [65, 59, 80, 81, 56, 55, 40],
-//     fill: false,
-//     borderColor: 'rgb(75, 192, 192)',
-//     tension: 0.1
-//   }]
-// };
-var options = {
-    series: [{
-    name: 'series1',
-    data: [31, 40, 28, 51, 42, 109, 100]
-  }, {
-    name: 'series2',
-    data: [11, 32, 45, 32, 34, 52, 41]
-  }],
-    chart: {
-    height: 350,
-    type: 'area'
-  },
-  dataLabels: {
-    enabled: false
-  },
-    dataLabels: {
-        style: {
-        colors: ['#F44336', '#E91E63', '#9C27B0']
-        }
-    },
-    theme: {
-        monochrome: {
-          enabled: true,
-          color: '#255aee',
-          shadeTo: 'light',
-          shadeIntensity: 0.65
-        }
-      },
-  stroke: {
-    curve: 'smooth'
-  },
-  dropShadow: {
-    enabled: true,
-    top: 0,
-    left: 0,
-    blur: 3,
-    opacity: 0.5
-  },
-  fill: {
-    type: 'gradient' / 'solid' / 'pattern' / 'image'
-  },
-//   fill: {
-//     type: 'pattern',
-//     pattern: {
-//       style: 'verticalLines',
-//       width: 6,
-//       height: 6,
-//       strokeWidth: 2
-//     }
-//   },
-//   fill: {
-//     colors: ['#F44336', '#E91E63', '#9C27B0']
-//   },
 
-  xaxis: {
-    type: 'datetime',
-    categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-  },
-  tooltip: {
-    x: {
-      format: 'dd/MM/yy HH:mm'
-    },
-  },
-  };
 
-  var chart = new ApexCharts(document.querySelector("#chart"), options);
-  chart.render();
 formInput.onsubmit  = function handleSubmit (e) 
 {
     e.preventDefault();
@@ -125,7 +51,7 @@ degC__Btn.addEventListener("click", changeDegToC);
 degF__Btn.addEventListener("click", changeDegToF);
 
 window.onload = function (e) {
-  getData(defaultLocationValue);
+    getData(defaultLocationValue);
 }
 
 function handleCheckWeather() 
@@ -147,11 +73,11 @@ function getData(value)
             showNotExistToast(value);
         }
        else
-       {            
-            // console.log(data);
-            // console.log(data.forecast.forecastday[0].astro.sunrise);
+       {    
             showWeatherCurrent(data);
-           showWeatherDetail(data);
+            showWeatherDetail(data);
+            showNextday(data);
+            showWeatherInADay(data);
        }
     })
     .catch((error) => 
@@ -178,48 +104,10 @@ function showWeatherDetail(data)
                 </span>
                 <span class="detail__info">
                     <span class="detail__title">Real Feel</span>
-                    <span>${data.current.uv}</span>
+                    <span>${data.current.feelslike_c}&deg;C</span>
                 </span>
             `;
             weatherDetail.innerHTML = weatherDetailElement;
-            // cardWrapperElement = `
-            // <div class="card__detail">
-            // <span class="card__time">0:00</span>
-            // <img class="card__icon" src="${weatherDetailInDayArray[0].condition.icon}" />
-            // <span class="card__tempC">${weatherDetailInDayArray[0].temp_c}&deg;</span>
-            // <span class="card__status">${weatherDetailInDayArray[0].condition.text}</span>
-            // </div>
-            // <div class="card__detail">
-            // <span class="card__time">4:00</span>
-            // <img class="card__icon" src="${weatherDetailInDayArray[4].condition.icon}" />
-            // <span class="card__tempC">${weatherDetailInDayArray[4].temp_c}&deg;</span>
-            // <span class="card__status">${weatherDetailInDayArray[4].condition.text}</span>
-            // </div>
-            // <div class="card__detail">
-            // <span class="card__time">8:00</span>
-            // <img class="card__icon" src="${weatherDetailInDayArray[8].condition.icon}" />
-            // <span class="card__tempC">${weatherDetailInDayArray[8].temp_c}&deg;</span>
-            // <span class="card__status">${weatherDetailInDayArray[8].condition.text}</span>
-            // </div>
-            // <div class="card__detail">
-            // <span class="card__time">12:00</span>
-            // <img class="card__icon" src="${weatherDetailInDayArray[12].condition.icon}" />
-            // <span class="card__tempC">${weatherDetailInDayArray[12].temp_c}&deg;</span>
-            // <span class="card__status">${weatherDetailInDayArray[12].condition.text}</span>
-            // </div>
-            // <div class="card__detail">
-            // <span class="card__time">16:00</span>
-            // <img class="card__icon" src="${weatherDetailInDayArray[16].condition.icon}" />
-            // <span class="card__tempC">>${weatherDetailInDayArray[16].temp_c}&deg;</span>
-            // <span class="card__status">${weatherDetailInDayArray[16].condition.text}</span>
-            // </div>
-            // <div class="card__detail">
-            // <span class="card__time">20:00</span>
-            // <img class="card__icon" src="${weatherDetailInDayArray[20].condition.icon}" />
-            // <span class="card__tempC">>${weatherDetailInDayArray[20].temp_c}&deg;</span>
-            // <span class="card__status">${weatherDetailInDayArray[20].condition.text}</span>
-            // </div>`;
-            // cardWrapper.innerHTML = cardWrapperElement;
 }
 function showWeatherCurrent(data) 
 {
@@ -233,9 +121,110 @@ function showWeatherCurrent(data)
     weatherTemperature.innerHTML = `${degValue}`;
     tempIcon.innerHTML = `${degIcon}`;
     conditionIcon.src =    `${data.current.condition.icon}`;
-    locationName.innerHTML = `${data.location.name}`;
+    locationName.innerHTML = `${data.location.name}, ${data.location.country}`;
 }
 
+function showNextday(data) 
+{
+    let day1 = data.forecast.forecastday[1];
+    let day2 = data.forecast.forecastday[2];
+    let day3 = data.forecast.forecastday[3];
+    nextdaysWrapperElement = `
+    <span class="cardTitle"> <span class="fontBold">3 days</span> <span class="fontThin">Forecast</span></span>
+    <div class="dayCard">
+        <div class="flex-column text-center mx-4">
+            <div class="card__time">${day1.date}</div>
+            <div class="card__temperature">${day1.day.avgtemp_c}&deg;C</div>
+        </div>
+        <div class="card__condition">
+            <img class="card__icon" src="${day1.day.condition.icon}"></img>
+            <div class="card__status">${day1.day.condition.text}</div>
+       </div>
+    </div>
+    <div class="dayCard">
+        <div class="card__condition">
+            <img class="card__icon" src="${day2.day.condition.icon}"></img>
+            <div class="card__status">${day2.day.condition.text}</div>
+       </div>
+        <div class="flex-column text-center mx-4">
+            <div class="card__time">${day2.date}</div>
+            <div class="card__temperature">${day2.day.avgtemp_c}&deg;C</div>
+        </div>
+       
+    </div>
+    <div class="dayCard">
+        <div class="flex-column text-center mx-4">
+            <div class="card__time">${day3.date}</div>
+            <div class="card__temperature">${day3.day.avgtemp_c}&deg;C</div>
+        </div>
+        <div class="card__condition">
+            <img class="card__icon" src="${day3.day.condition.icon}"></img>
+            <div class="card__status">${day3.day.condition.text}</div>
+       </div>
+    </div>
+    `;
+    nextdaysWrapper.innerHTML = nextdaysWrapperElement;
+}
+function showWeatherInADay(data)
+{
+    let weatherToday = data.forecast.forecastday[0].hour;
+
+    let temp = [];
+    let wind = [];
+    let humidity = [];
+    
+    for (let i = 0; i < 24; i++)
+    {
+        temp[i] = weatherToday[i].temp_c;
+        wind[i] = weatherToday[i].wind_mph;
+        humidity[i] = weatherToday[i].humidity;
+      
+    };
+    var options = {
+            series: [
+            {
+            name: 'Temperature',
+            data: temp
+            },
+            {
+                name: 'Wind',
+                data: wind
+            },
+            {
+                name: 'Humidity',
+                data: humidity
+            }
+            ],
+            chart: {
+            height: 350,
+            type: 'area'
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            categories: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00",  "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"],
+
+            labels: {
+                format: 'HH:mm',
+            }
+        },
+        title: {
+            text: "How is the weather today?",
+            align: 'center',
+            style: {
+                fontSize: '28px',
+                fontWeight: 'normal',
+                fontFamily: 'inherit'   
+            },
+            
+        }
+        
+    };
+  var chart = new ApexCharts(document.querySelector("#chart"), options);
+  chart.render();
+
+}
 function handleToast({message}) {
 
 
