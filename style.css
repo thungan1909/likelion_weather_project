@@ -152,10 +152,15 @@ body {
 .detail__title{
     font-weight: bold;
 }
-
+.detail__info--seperate{
+    border-right: 1px solid;
+    border-color: inherit;
+    padding-right: .8rem;
+    margin-right: 0;
+}
 
 /* END: BANNER */
-#content{
+#container{
 
     display: flex;
     flex-direction: row;

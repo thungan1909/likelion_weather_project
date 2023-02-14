@@ -82,7 +82,8 @@ function getData(value)
     })
     .catch((error) => 
     {
-        console.log('error', error);
+        
+        // console.log('error', error);
     })
 }
 function showWeatherDetail(data)
@@ -90,15 +91,15 @@ function showWeatherDetail(data)
     weatherDetailInDayArray = data.forecast.forecastday[0].hour;
                 weatherDetailElement =  `
                 
-                <span class="detail__info">
+                <span class="detail__info detail__info--seperate">
                     <span class="detail__title">Wind</span>
                     <span>${data.current.wind_mph}mph</span>
                 </span>
-                <span class="detail__info">
+                <span class="detail__info detail__info--seperate">
                     <span class="detail__title">Humidity</span>
                     <span>${data.current.humidity}</span>
                 </span>
-                <span class="detail__info">
+                <span class="detail__info detail__info--seperate">
                     <span class="detail__title">UV</span>
                     <span>${data.current.uv}</span>
                 </span>
@@ -308,19 +309,16 @@ function validateInput(value)
     }
 }
 
-function isDay(value){
-    if(value == 1) return true;
-    else return false;
-}
 function showBackground(data)
 {
-    console.log(data.current.is_day);
-    if(isDay(data.current.is_day))
+   
+    if (data.current.is_day === 1)
     {
-        banner.style.backgroundImage = "url('./assets/anhmay.jpg');"
+        console.log("me");
+        banner.style.backgroundImage = "url('./assets/anhmay.jpg')"
         banner.style.color = "#000";
     }
-    else {
+    else if (data.current.is_day === 0){
         banner.style.backgroundImage = "url('./assets/night.jpg')";
         banner.style.color = "#FFF";
     }
