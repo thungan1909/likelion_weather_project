@@ -7,6 +7,8 @@ Created by **Doan Thu Ngan**
 ## User interface (UI) for PC:
 
 ![image](https://user-images.githubusercontent.com/55989458/218959755-a3293197-3e0f-42aa-8549-41eabb333e90.png)
+![image](https://user-images.githubusercontent.com/55989458/218974904-6883932e-627f-4fb8-98c3-a7e7dec9f036.png)
+
 
 ##  User interface (UI) for mobile:
 ![image](https://user-images.githubusercontent.com/55989458/218960677-7891b026-5826-4d3c-ae0f-ebd39157360e.png)
@@ -29,6 +31,7 @@ Created by **Doan Thu Ngan**
     - [x] c. The degree can be changed from C to F and back.
     - [x] d. The next three days' weather forecast is available.
     - [x] d. A chart will be shown with all of today's specific data, including the temperature, wind speed, and humidity for each hour. You can select any item to view it separately.
+    - [x] d. The banner and colour will switch to a dark theme if the location current is not a day.
 - [x] 3. In the instances listed below, the website will display an error message toast:
     - [x] a. No internet
     - [x] b. Location name is incorrect
