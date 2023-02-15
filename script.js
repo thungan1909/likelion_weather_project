@@ -93,7 +93,7 @@ function handleGetWeather()
 //function to get data from api and show to ui
 function getData(value) 
 {
-    const response = fetch(`http://api.weatherapi.com/v1/forecast.json?key=4acb30f8960e480c96131445230802&q=${value}&days=10&aqi=yes&alerts=no`);
+    const response = fetch(`https://api.weatherapi.com/v1/forecast.json?key=4acb30f8960e480c96131445230802&q=${value}&days=10&aqi=yes&alerts=no`);
     response.then(res => res.json())
     .then((data) =>
     {
