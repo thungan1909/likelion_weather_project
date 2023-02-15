@@ -28,7 +28,7 @@ Created by **Doan Thu Ngan**
     - [x] b. A few specifics like wind, humidity, UV, and the feel like temperature will be shown.
     - [x] c. The degree can be changed from C to F and back.
     - [x] d. The next three days' weather forecast is available.
-    - [x] d. Today's detailed information, including the temperature, wind speed, and humidity for each hour, will be displayed.
+    - [x] d. A chart will be shown with all of today's specific data, including the temperature, wind speed, and humidity for each hour. You can select any item to view it separately.
 - [x] 3. In the instances listed below, the website will display an error message toast:
     - [x] a. No internet
     - [x] b. Location name is incorrect
