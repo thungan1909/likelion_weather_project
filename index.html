@@ -28,25 +28,24 @@
             
             <div class="flex-column my-4 ">
                 <form id="inputForm" name="inputForm">
-                    <span class="p-1">Right now in</span>
-                    <input type="text"  class="location__Input" placeholder="your location">
+                    <span class="p-1 input__text"></span>
+                    <input type="text"  class="location__Input">
                     <span class="current__status"> </span>
                 </form>
                 <div class="weather__current">
                     <div class="weather__info">
                         <span class="weather__temperature"></span>
                         <span class="temp__icon"></span>
-                        <img class="condition__icon" src="" alt="condition__icon">              
+                        <div class="condition__icon">
+                        </div>              
                     </div>
                     <div class="changeDeg">
                         <button class="deg__Btn degC__Btn">
-                            <span> &deg;</span>
-                            <i class="fa-solid fa-c"></i>
+                           
                         </button>
-                        <span>/</span>
+                        <span class="deg__Btn--seperate"></span>
                         <button class="deg__Btn degF__Btn">
-                            <span> &deg;</span>
-                            <i class="fa-solid fa-f"></i>
+                          
                         </button>
                     </div>
                     <span class="location__name"></span>  

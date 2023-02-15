@@ -2,9 +2,8 @@
 const $ = document.querySelector.bind(document);
 
 const page = $("#page");
-const locationInput = $(".location__Input");
 const formInput = document.getElementById("inputForm");
-const current__status = $(".current__status");
+
 const contentWrapper = $(".contentWrapper");
 const weatherCurrent = $(".weather__current");
 const weatherDetail = $(".weather__detail");
@@ -20,6 +19,11 @@ const conditionIcon = $(".condition__icon");
 const locationName = $(".location__name");
 const nextdaysWrapper = $(".nextdaysWrapper");
 const banner = $("#banner");
+const inputForm = $("#inputForm");
+const inputText = $(".input__text");
+const locationInput = $(".location__Input");
+const currentStatus = $(".current__status");
+const degBtnSeperate = $(".deg__Btn--seperate");
 
 //variable to save element
 let weatherCurrentValue;
@@ -29,13 +33,13 @@ let defaultLocationValue = "VietNam";
 
 let weatherDetailInDayArray;
 
-
+let iconStatusElement;
 let currentStatusElement;
 let weatherDetailElement;
 let cardWrapperElement;
 let weatherCurrentElement;
 let nextdaysWrapperElement;
-
+let inputFormElement;
 
 let degIcon = "&degC";
 let degValue;
@@ -82,8 +86,7 @@ function getData(value)
     })
     .catch((error) => 
     {
-        
-        // console.log('error', error);
+        showCanNotGetApi();
     })
 }
 function showWeatherDetail(data)
@@ -110,21 +113,49 @@ function showWeatherDetail(data)
             `;
             weatherDetail.innerHTML = weatherDetailElement;
 }
+function resetAll() 
+{
+
+}
 function showWeatherCurrent(data) 
 {
  
     showBackground(data);
     degValue = data.current.temp_c;
-    currentStatusElement = `<span class="current__status"> It's is  ${data.current.condition.text}.</span>  `;
-    current__status.innerHTML = currentStatusElement ;
+
+    inputText.innerHTML =   `Right now in`;
+    locationInput.style.borderBottom = "1px solid";
+    locationInput.style.borderColor = "inherit";
+    locationInput.innerHTML = `placeholder="your location"`;
+    currentStatus.innerHTML = `. It's is  ${data.current.condition.text}.`;
+    
 
     locationTime.innerHTML = `${data.location.localtime}`;
     weatherTemperature.innerHTML = `${degValue}`;
     tempIcon.innerHTML = `${degIcon}`;
-    conditionIcon.src =    `${data.current.condition.icon}`;
+    conditionIcon.innerHTML =  '';
+    iconStatusElement = document.createElement('img');
+    iconStatusElement.classList.add("condition__icon--img");
+    iconStatusElement.src = `${data.current.condition.icon}`;
+    conditionIcon.appendChild(iconStatusElement);
+
+    showButtonChangeDeg();
     locationName.innerHTML = `${data.location.name}, ${data.location.country}`;
 }
 
+function showButtonChangeDeg () 
+{   
+    degC__Btn.innerHTML =  `
+            <span> &deg;</span>
+            <i class="fa-solid fa-c"></i>
+    `;
+    degBtnSeperate.style.borderRight = "1px solid";
+    degBtnSeperate.style.borderColor = "inherit";
+    degF__Btn.innerHTML = `
+            <span> &deg;</span>
+            <i class="fa-solid fa-f"></i>
+    `
+}
 function showNextday(data) 
 {
     let day1 = data.forecast.forecastday[1];
@@ -280,6 +311,14 @@ function showNotChangeDegToast() {
         }
     )
 }
+function showCanNotGetApi() 
+{
+    handleToast (
+        {
+            message: `No internet. Please try again later! `
+        }
+    )
+}
 
 //function to check value is empty or not
 function checkEmptyValue (value) 
@@ -314,7 +353,8 @@ function showBackground(data)
    
     if (data.current.is_day === 1)
     {
-        console.log("me");
+      
+        banner.style.animation = "slideInLeft ease 1s";
         banner.style.backgroundImage = "url('./assets/anhmay.jpg')"
         banner.style.color = "#000";
     }

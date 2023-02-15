@@ -32,8 +32,7 @@ body {
 }
 #page {
     width: 100%;
-    height: 100%;
-   
+    height: 100%;  
 }
 /* 
 1. Từ ngoài vào trong
@@ -51,9 +50,9 @@ body {
     height: 60%;
     margin: 24px;
     border-radius: 16px;
-    background-color: #000;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    
 }
 
 /* BEGIN: INPUT */
@@ -62,25 +61,24 @@ body {
     display: flex;
     flex-direction: row;
     font-size: 20px;
+    color: inherit;
 }
 
-/*
-1. Vị trí
-2. Kích thước (Width, height)
-3. Màu sắc
-4. Hình dáng (Kiểu chữ, 
-*/
 
 .location__Input{
     width: min-content;
     height: 32px;
     text-align: center;
     border: none;
-    border-bottom: 1px solid #FFF;
+  
     background: rgba(0, 0, 0, 0);
     transition: ease-in-out, width .35s ease-in-out;
     color: inherit;
     font-weight: bold;
+}
+
+.location__Input::placeholder{
+    color: inherit;
 }
 
 .location__Input:focus{
@@ -125,13 +123,20 @@ body {
     color: inherit;
     font-family: inherit;
 }
+.deg__Btn--seperate{
+  
+    padding-right: .8rem;
+    margin-right: 0;
+    height: 16px;
+    transform: translateY(50%);
+}
 .location__name{
     font-size: 32px;
 }
 .location__time{
     font-size: 16px;
 }
-.condition__icon{
+.condition__icon--img{
     width: 96px;
     height: 96px; 
 }
@@ -206,6 +211,7 @@ body {
     border-radius: 16px;
     font-size: 16px;
     background-color: #5f7ead;
+   
 }
 .card__info {
     display: flex;
@@ -244,7 +250,7 @@ body {
     box-shadow: 0 5px 8px rgb(0,0,0,0.08);
     transform: all linear .3s;
     background-color: #FFF;
-    animation: slideInLeft ease .3s, fadeOut linear 1s 3s forwards;
+    
 }
 @keyframes slideInLeft {
     from {
