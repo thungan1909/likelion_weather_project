@@ -94,6 +94,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 .weather__info{
@@ -148,6 +149,7 @@ body {
     display: flex;
     flex-direction: row;   
     align-items: end;
+    margin-bottom:  16px;
 }
 
 .detail__info{

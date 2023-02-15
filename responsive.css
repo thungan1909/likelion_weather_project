@@ -17,6 +17,9 @@
 /* @media (max-width : 739px) */
 @media (max-width : 46.1875em)
 {  
+    #banner{
+        max-height: 100%;
+    }
     #inputForm{
         flex-direction: column;
         align-items: center;

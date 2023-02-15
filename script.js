@@ -25,7 +25,6 @@ const locationInput = $(".location__Input");
 const currentStatus = $(".current__status");
 const degBtnSeperate = $(".deg__Btn--seperate");
 
-//variable to save element
 let weatherCurrentValue;
 let locationInputValue;
 let defaultLocationValue = "VietNam";
@@ -33,6 +32,8 @@ let defaultLocationValue = "VietNam";
 
 let weatherDetailInDayArray;
 
+
+//variable to save element
 let iconStatusElement;
 let currentStatusElement;
 let weatherDetailElement;
@@ -44,28 +45,52 @@ let inputFormElement;
 let degIcon = "&degC";
 let degValue;
 
-
-
+//Handle to load default value when load window
+window.onload = function (e) {
+    getData(defaultLocationValue);
+}
 formInput.onsubmit  = function handleSubmit (e) 
 {
     e.preventDefault();
-   handleCheckWeather();
+    handleGetWeather();
 }
 degC__Btn.addEventListener("click", changeDegToC);
 degF__Btn.addEventListener("click", changeDegToF);
 
-window.onload = function (e) {
-    getData(defaultLocationValue);
+//function to check value is empty or not
+function checkEmptyValue (value) 
+{
+    if (value === "") 
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-function handleCheckWeather() 
+//function to validate input
+function validateInput(value) 
+{
+    if(!checkEmptyValue(value)) 
+    {
+        getData(value);
+    }
+    else 
+    {
+       showEmptyToast();
+    }
+}
+//function to get value from search input, validate and show
+function handleGetWeather() 
 {   
     locationInputValue = locationInput.value;
     validateInput(locationInputValue);
     
 }
 
-//function to get data from api
+//function to get data from api and show to ui
 function getData(value) 
 {
     const response = fetch(`http://api.weatherapi.com/v1/forecast.json?key=4acb30f8960e480c96131445230802&q=${value}&days=10&aqi=yes&alerts=no`);
@@ -89,6 +114,10 @@ function getData(value)
         showCanNotGetApi();
     })
 }
+
+//SHOW TO UI
+//function to show detail (wind, humidity, uv, feelLike) of current weather
+
 function showWeatherDetail(data)
 {
     weatherDetailInDayArray = data.forecast.forecastday[0].hour;
@@ -113,10 +142,7 @@ function showWeatherDetail(data)
             `;
             weatherDetail.innerHTML = weatherDetailElement;
 }
-function resetAll() 
-{
-
-}
+//function to show current weather
 function showWeatherCurrent(data) 
 {
  
@@ -142,7 +168,7 @@ function showWeatherCurrent(data)
     showButtonChangeDeg();
     locationName.innerHTML = `${data.location.name}, ${data.location.country}`;
 }
-
+//function to show button Change Temperature 
 function showButtonChangeDeg () 
 {   
     degC__Btn.innerHTML =  `
@@ -156,6 +182,7 @@ function showButtonChangeDeg ()
             <i class="fa-solid fa-f"></i>
     `
 }
+//function to show the next days weather
 function showNextday(data) 
 {
     let day1 = data.forecast.forecastday[1];
@@ -197,6 +224,7 @@ function showNextday(data)
     `;
     nextdaysWrapper.innerHTML = nextdaysWrapperElement;
 }
+//function to show the chart of weather detail (temperature, wind, humidity) in this day
 function showWeatherInADay(data)
 {
     let weatherToday = data.forecast.forecastday[0].hour;
@@ -257,6 +285,57 @@ function showWeatherInADay(data)
   chart.render();
 
 }
+//function to show background
+function showBackground(data)
+{
+   
+    if (data.current.is_day === 1)
+    {
+      
+        banner.style.animation = "slideInLeft ease 1s";
+        banner.style.backgroundImage = "url('./assets/anhmay.jpg')"
+        banner.style.color = "#000";
+    }
+    else if (data.current.is_day === 0){
+        banner.style.backgroundImage = "url('./assets/night.jpg')";
+        banner.style.color = "#FFF";
+    }
+}
+
+
+//CHANGE DEG
+//function to change deg to F
+function changeDegToF() {
+
+    if (degIcon === "&degC")
+    {
+        degValue = Math.round((degValue * 1.8) + 32);
+        degIcon = "&degF";
+        weatherTemperature.innerHTML = `${degValue}`;
+        tempIcon.innerHTML = `${degIcon}`;
+    }
+    else {
+        showNotChangeDegToast();
+    }
+    
+}
+//function to change deg to C
+function changeDegToC () {
+
+    if(degIcon === "&degF")
+    {
+        degValue= Math.round((degValue-32) / 1.8);
+        degIcon = "&degC";
+        weatherTemperature.innerHTML = `${degValue}`;
+        tempIcon.innerHTML = `${degIcon}`;
+    }
+    else {
+        showNotChangeDegToast();
+    }
+}
+
+// TOAST
+//function to handle toast
 function handleToast({message}) {
 
 
@@ -290,6 +369,7 @@ function handleToast({message}) {
 
     toast.appendChild(toastValue);
 }
+//function to show not exist location toast
 function showNotExistToast(value) {
     handleToast(
         {
@@ -297,6 +377,7 @@ function showNotExistToast(value) {
         }
     );
 }
+//function to show empty input toast
 function showEmptyToast() {
         handleToast (
             {
@@ -304,6 +385,7 @@ function showEmptyToast() {
             }
         )
 }
+//function to show can't change temperature toast
 function showNotChangeDegToast() {
     handleToast (
         {
@@ -311,6 +393,7 @@ function showNotChangeDegToast() {
         }
     )
 }
+//function to show can't get api
 function showCanNotGetApi() 
 {
     handleToast (
@@ -320,75 +403,3 @@ function showCanNotGetApi()
     )
 }
 
-//function to check value is empty or not
-function checkEmptyValue (value) 
-{
-
-    if (value === "") 
-    {
-            return true;
-    }
-    else
-    {
-        return false;
-    }
-      
-}
-
-//function to validate input
-function validateInput(value) 
-{
-    if(!checkEmptyValue(value)) 
-    {
-        getData(value);
-    }
-    else 
-    {
-       showEmptyToast();
-    }
-}
-
-function showBackground(data)
-{
-   
-    if (data.current.is_day === 1)
-    {
-      
-        banner.style.animation = "slideInLeft ease 1s";
-        banner.style.backgroundImage = "url('./assets/anhmay.jpg')"
-        banner.style.color = "#000";
-    }
-    else if (data.current.is_day === 0){
-        banner.style.backgroundImage = "url('./assets/night.jpg')";
-        banner.style.color = "#FFF";
-    }
-}
-
-
-function changeDegToF() {
-
-    if (degIcon === "&degC")
-    {
-        degValue = Math.round((degValue * 1.8) + 32);
-        degIcon = "&degF";
-        weatherTemperature.innerHTML = `${degValue}`;
-        tempIcon.innerHTML = `${degIcon}`;
-    }
-    else {
-        showNotChangeDegToast();
-    }
-    
-}
-function changeDegToC () {
-
-    if(degIcon === "&degF")
-    {
-        degValue= Math.round((degValue-32) / 1.8);
-        degIcon = "&degC";
-        weatherTemperature.innerHTML = `${degValue}`;
-        tempIcon.innerHTML = `${degIcon}`;
-    }
-    else {
-        showNotChangeDegToast();
-    }
-}
