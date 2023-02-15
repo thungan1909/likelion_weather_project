@@ -293,14 +293,14 @@ function handleToast({message}) {
 function showNotExistToast(value) {
     handleToast(
         {
-            message:    `Not exist ${value}. Please try another location again.`,
+            message:    `Sorry, we couldn't found ${value}. Please try another location again!`,
         }
     );
 }
 function showEmptyToast() {
         handleToast (
             {
-                message:   `This input is empty. Please try again`
+                message:   `This input is empty. Please try again later!`
             }
         )
 }
