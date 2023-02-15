@@ -17,7 +17,7 @@ Created by **Doan Thu Ngan**
 ## 🔑 Core Requirements
 
 - [x] 1. Using the HTML, CSS, JavaScript, and a weather API.
-- [x] 2. The website's layout features a location, location, weather, and search bar, ...
+- [x] 2. The website's layout features a location, weather, and search bar, ...
 - [x] 3. Website to get API: https://www.weatherapi.com/api-explorer.aspx#current
 
 ## 💯 Description of website features
