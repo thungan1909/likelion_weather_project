@@ -4,14 +4,6 @@
 
 This is a LIKELION FRONT-END CLASS project. 
 Created by **Doan Thu Ngan**
-## User interface (UI) for PC:
-
-![image](https://user-images.githubusercontent.com/55989458/218959755-a3293197-3e0f-42aa-8549-41eabb333e90.png)
-![image](https://user-images.githubusercontent.com/55989458/218974904-6883932e-627f-4fb8-98c3-a7e7dec9f036.png)
-
-
-##  User interface (UI) for mobile:
-![image](https://user-images.githubusercontent.com/55989458/218960677-7891b026-5826-4d3c-ae0f-ebd39157360e.png)
 
 
 ## How to run the program
@@ -37,3 +29,11 @@ Created by **Doan Thu Ngan**
     - [x] b. Location name is incorrect
     - [x] c. Location input is empty
     - [x] d. F or C degrees are not possible because they duplicate existing degrees.
+## User interface (UI) for PC:
+
+![image](https://user-images.githubusercontent.com/55989458/218959755-a3293197-3e0f-42aa-8549-41eabb333e90.png)
+![image](https://user-images.githubusercontent.com/55989458/218974904-6883932e-627f-4fb8-98c3-a7e7dec9f036.png)
+
+
+##  User interface (UI) for mobile:
+![image](https://user-images.githubusercontent.com/55989458/218960677-7891b026-5826-4d3c-ae0f-ebd39157360e.png)
